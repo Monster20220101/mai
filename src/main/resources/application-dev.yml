@@ -1,0 +1,37 @@
+# DataSource Config
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mai?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+    username: root
+    password: 123
+    hikari:
+      idle-timeout: 60000 # 空闲时间
+      maximum-pool-size: 10 # 池中最大连接数（包括空闲和正在使用的连接）
+      minimum-idle: 5 # 池中最小空闲连接数量，默认值是10
+  servlet: #设置tomcat文件上传大小限制，默认1mb/10mb不够用
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 1000MB
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**Mapper.xml
+  # 如果配在java文件夹里：classpath:com/mai/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+server:
+  port: 8081
+
+shiro-redis:
+  enabled: true
+  redis-manager:
+    host: 127.0.0.1:6379
+mai:
+  jwt:
+    # 加密秘钥
+    secret: f4e2e52034348f86b67cde581c0f9eb5
+    # token有效时长，7天，单位秒
+    expire: 604800
+    header: token
+logging:
+  level:
+    root: WARN
